@@ -14,10 +14,19 @@ class RedactingFormatter(logging.Formatter):
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
+        """Instantiates RedactingFormatter"""
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
+        """Format the log record and obfuscate sensitive data.
+
+        Args:
+                record (logging.LogRecord): contains the log message
+
+        Returns:
+                str: The formatted log message with sensitive data obfuscated
+        """
         message = super().format(record)
         obfuscated = filter_datum(self.fields, self.REDACTION,
                                   message, self.SEPARATOR)
