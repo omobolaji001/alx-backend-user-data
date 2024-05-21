@@ -27,9 +27,10 @@ class Auth:
 
         path = path.rstrip("/")
         for _path in excluded_paths:
-            _path = _path.rstrip("/")
+            _path.rstrip("/")
             if path == _path:
                 return False
+
         return True
 
     def authorization_header(self, request=None) -> str:
@@ -41,7 +42,12 @@ class Auth:
         Return:
           - str: The authorization header
         """
-        return None
+        if request is None:
+            return None
+        if request.authorization is None:
+            return None
+
+        return request.authorization
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Retrieves the current authenticated user
