@@ -9,6 +9,10 @@ import base64
 class BasicAuth(Auth):
     """Represents Basic Authentication"""
 
+    def __init__(self):
+        """Instantiates BasicAuth"""
+        super().__init__()
+
     def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
         """Returns the Base64 part of the Authorization header"""
@@ -71,3 +75,27 @@ class BasicAuth(Auth):
             return None
         except Exception:
             return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """Retrieves the current authenticated user
+
+        Args:
+          - request (optional): The request object representing
+            the current HTTP request
+
+        Return:
+          - str: The current authenticated user
+        """
+        auth_header = self.authorization_header(request)
+        if auth_header:
+            token = self.extract_base64_authorization_header(auth_header)
+            if token:
+                str_token = self.decode_base64_authorization_header(token)
+                if str_token:
+                    email, password = self.extract_user_credentials(str_token)
+                    if email is not None and password is not None:
+                        current_user = self.user_object_from_credentials(
+                                email, password)
+
+                        return current_user
+        return
