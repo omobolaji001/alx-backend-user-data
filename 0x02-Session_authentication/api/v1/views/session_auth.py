@@ -6,7 +6,8 @@ from models.user import User
 import os
 
 
-@app_views.route('/auth_session/login/', methods=['POST'], strict_slashes=False)
+@app_views.route('/auth_session/login/', methods=['POST'],
+                 strict_slashes=False)
 def auth_login():
     """Handles user login
 
@@ -16,14 +17,14 @@ def auth_login():
     email = request.form.get('email')
     password = request.form.get('password')
 
-    if email is None or email == '':
-        return jsonify({'error': 'email is missing'}), 400
-    if password is None or password == '':
-        return jsonify({'error': 'password is missing'}), 400
+    if email is None or email == "":
+        return jsonify({"error": "email is missing"}), 400
+    if password is None or password == "":
+        return jsonify({"error": "password is missing"}), 400
 
     users = User.search({'email': email})
-    if users is None or users == []:
-        return jsonify({'error': 'no user found for this email'}), 404
+    if not users or users == []:
+        return jsonify({"error": "no user found for this email"}), 404
 
     for user in users:
         if user.is_valid_password(password):
@@ -34,4 +35,4 @@ def auth_login():
             response.set_cookie(session_name, session_id)
 
             return response
-    return jsonify({'error': 'wrong password'}), 401
+    return jsonify({"error": "wrong password"}), 401
