@@ -43,6 +43,5 @@ def logout():
     """Logs user out of the current session"""
     from api.v1.views import auth
     if auth.destroy_session():
-        return jsonify({})
-    else:
-        abort(404)
+        return jsonify({}), 200
+    abort(404)
