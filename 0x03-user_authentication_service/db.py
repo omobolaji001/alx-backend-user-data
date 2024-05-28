@@ -41,7 +41,7 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs: dict) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """Finds user by key-word arugument
         """
         all_users = self._session.query(User)
@@ -54,3 +54,5 @@ class DB:
                 if getattr(user, key) == value:
                     return user
         raise NoResultFound
+
+    def update_user(self, user_id: int, **kwargs) -> User:
