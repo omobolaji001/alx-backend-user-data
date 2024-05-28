@@ -55,4 +55,4 @@ class DB:
                     return user
         raise NoResultFound
 
-    def update_user(self, user_id: int, **kwargs) -> User:
+##    def update_user(self, user_id: int, **kwargs) -> User:
