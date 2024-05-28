@@ -59,7 +59,7 @@ class DB:
     def update_user(self, user_id: int, **kwargs) -> User:
         """Updates user"""
         try:
-            user = self.find_user_by({id: user_id})
+            user = self.find_user_by(id=user_id)
         except NoResultFound:
             raise ValueError
 
