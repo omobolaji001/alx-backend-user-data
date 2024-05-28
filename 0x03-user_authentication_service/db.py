@@ -41,7 +41,7 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs: dict) -> str:
+    def find_user_by(self, **kwargs: dict) -> User:
         """Finds user by key-word arugument
         """
         all_users = self._session.query(User).all()
