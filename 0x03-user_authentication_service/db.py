@@ -9,7 +9,6 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 
 from user import Base, User
-from typing import Dict
 
 
 class DB:
@@ -56,7 +55,7 @@ class DB:
                     return user
         raise NoResultFound
 
-    def update_user(self, user_id: int, **kwargs) -> User:
+    def update_user(self, user_id: int, **kwargs) -> None:
         """Updates user"""
         try:
             user = self.find_user_by(id=user_id)
