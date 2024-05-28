@@ -44,7 +44,7 @@ class DB:
     def find_user_by(self, **kwargs: dict) -> User:
         """Finds user by key-word arugument
         """
-        all_users = self._session.query(User).all()
+        all_users = self._session.query(User)
 
         for key, value in kwargs.items():
             if key not in User.__dict__:
