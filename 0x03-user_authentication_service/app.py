@@ -68,7 +68,7 @@ def profile() -> str:
     """Returns user email based on the session_id
     in the received cookies
     """
-    session_id = request.cookies.get("session_id")
+    session_id = request.cookies.get("session_id", None)
     user = AUTH.get_user_from_session_id(session_id)
 
     if user:
