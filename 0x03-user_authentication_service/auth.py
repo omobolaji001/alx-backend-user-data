@@ -61,7 +61,7 @@ class Auth:
         except Exception:
             return None
 
-    def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
+    def get_user_from_session_id(self, session_id: str) -> User:
         """Retrieves user based on session_id
         """
         try:
