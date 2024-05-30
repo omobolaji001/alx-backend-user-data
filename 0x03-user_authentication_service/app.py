@@ -54,7 +54,7 @@ def login() -> str:
 def logout():
     """logout
     """
-    session_id = request.cookies.get("session_id", None)
+    session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
 
     if session_id is None or user is None:
@@ -68,7 +68,7 @@ def profile() -> str:
     """Returns user email based on the session_id
     in the received cookies
     """
-    session_id = request.cookies.get("session_id", None)
+    session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
 
     if user:
