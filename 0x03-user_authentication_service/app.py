@@ -6,8 +6,7 @@ from flask import (
     jsonify,
     request,
     abort,
-    redirect,
-    url_for
+    redirect
 )
 from auth import Auth
 
@@ -66,9 +65,10 @@ def logout():
 
 @app.route("/profile", methods=["GET"], strict_slashes=False)
 def profile() -> str:
-    """user profile
+    """Returns user email based on the session_id
+    in the received cookies
     """
-    session_id = request.cookies.get("session_id", None)
+    session_id = request.cookies.get("session_id")
     user = AUTH.get_user_from_session_id(session_id)
 
     if user:
