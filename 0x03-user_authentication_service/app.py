@@ -23,7 +23,7 @@ def home() -> str:
 
 
 @app.route("/users", methods=["POST"], strict_slashes=False)
-def register_user():
+def register_user() -> str:
     """Register new user
     """
     email = request.form.get("email")
@@ -37,7 +37,7 @@ def register_user():
 
 
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
-def login():
+def login() -> str:
     """login
     """
     email = request.form.get("email")
@@ -55,13 +55,13 @@ def login():
 def logout():
     """logout
     """
-    session_id = request.cookie.get("session_id")
+    session_id = request.cookies.get("session_id", None)
     user = AUTH.get_user_from_session_id(session_id)
 
     if session_id is None or user is None:
         abort(403)
     AUTH.destroy_session(user.id)
-    return redirect("/")
+    return redirect(url_for("/"), 301)
 
 
 if __name__ == "__main__":
