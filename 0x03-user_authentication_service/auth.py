@@ -59,4 +59,3 @@ class Auth:
             return user.session_id
         except Exception:
             return None
-
